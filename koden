@@ -1,0 +1,49 @@
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <time.h>
+  #define size_of_array 100
+  #define max 30000
+
+  int compare_size(const void * a, const void * b);
+
+    int main(void)
+    {
+        double *size;
+        size=(double *)malloc(sizeof(double)*size_of_array);
+        srand(time(NULL));
+
+        /*print the random numbers*/
+        printf("before sorting: \n");
+        for (int i = 0; i < size_of_array; ++i)
+        {
+            *size=rand();
+            if (*size>max)
+            {
+                i--;
+            }
+            else 
+            {
+            printf("%.2lf\n", *size);
+            size++;
+            }
+        }
+        /*reset the size to 1*/
+        size-=100;
+
+        /*sort it*/
+        qsort(size, size_of_array, sizeof(double), compare_size);
+
+        /*print the sorted array*/
+        printf("after sorting\n");
+        for (int i = 0; i < size_of_array; ++i)
+        {
+            printf("%.2lf\n", *size);
+            size++;
+              
+        }
+        return 0;
+    }
+    int compare_size(const void * a, const void * b)
+        {
+            return ( *(double *)a - *(double *)b);
+        }
